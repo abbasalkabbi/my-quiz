@@ -1,0 +1,13 @@
+.home{
+    width: 100vw;
+    height: 100vh;
+}
+*::after,*::before{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    
+}
+body{
+    overflow-x: hidden;
+}

@@ -21,7 +21,6 @@ function App() {
           </Routes>
         </BrowserRouter> 
       </Context.Provider>
-      
   </div>
   );
 }
