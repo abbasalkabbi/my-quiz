@@ -1,6 +1,17 @@
 .home{
     width: 100vw;
     height: 100vh;
+    background-image: url("../assets/bg-home.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-clip: content-box;
+}
+.home h1{
+    font-size: 72px;
+}
+.home .link{
+    font-size: 42px;
 }
 *::after,*::before{
     padding: 0px;
