@@ -13,7 +13,7 @@ function Home() {
                     </h1>
                     <NavLink
                     to='/login'
-                    className='btn btn-outline-success text-white link'>
+                    className='btn btn-secondary text-white link'>
                         Take A Quiz
                     </NavLink>
             </main>

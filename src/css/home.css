@@ -9,9 +9,11 @@
 }
 .home h1{
     font-size: 72px;
+    text-shadow: #FC0 1px 0 10px;
 }
 .home .link{
     font-size: 42px;
+    box-shadow: 12px 12px 20px 3px #00000080;
 }
 *::after,*::before{
     padding: 0px;
