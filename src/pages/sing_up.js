@@ -1,6 +1,6 @@
 import { Component } from "react";
 import "../css/sing_up.css"
-
+import axios from "axios";
 class Sing_up extends Component{
     constructor(){
         super();
@@ -35,6 +35,34 @@ class Sing_up extends Component{
         this.setState({
             password:e.target.value
         })
+    }
+    // 
+     // handleFormSubmit
+     handleFormSubmit(event){
+        event.preventDefault();
+        console.log('ss')
+        let register_data={
+            name: this.state.name,
+            email: this.state.email,
+            password:this.state.password,
+            role:this.state.role,
+        }
+        axios({
+            method: 'post',
+            url: `http://localhost/my-quiz/api/register.php`,
+            headers: { 'content-type': 'application/json' },
+            data: register_data
+        })
+        .then(result =>
+            { console.log(result.data)
+            this.setState({
+            info: result.data.message,
+            status:result.data.status,
+            id:result.data.id,
+            })
+        }
+            )
+        
     }
     render(){
         let {name,role,email,password}=this.state
@@ -96,8 +124,8 @@ class Sing_up extends Component{
                                             {/*  end opation*/}
                                             {/* submit */}
                                             <div class="d-flex justify-content-center">
-                                                <button type="button"
-                                                class="text-white btn btn-primary  btn-lg">Register</button>
+                                                <button type="submit"
+                                                class="text-white btn btn-primary  btn-lg"  onClick={e => this.handleFormSubmit(e)}>Register</button>
                                             </div>
                                             {/* a link for login */}
                                             <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="./sing_in"
