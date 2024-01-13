@@ -23,9 +23,9 @@ function Layout() {
                         </li>
                         <li className="nav-item">
                             <NavLink
-                  				to='/login'
+                  				to='/Sing_in'
                   				className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-                  				Login
+                  				Sing_in
                   			</NavLink>
                          </li>
                     </ul>
