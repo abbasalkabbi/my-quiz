@@ -10,7 +10,7 @@ class User
     private $password;
     public $role;
     public $db;
-    
+    // set 
     private function SetName($name){
         return $this->name=$name;
     }
@@ -26,6 +26,8 @@ class User
     public function SetDb($db){
         return $this->db=$db;
     }
+    // end set
+    // create
     public function create($user){
         $this->SetName($user->name);
         $this->SetEmail($user->email);
@@ -34,6 +36,8 @@ class User
         $register=mysqli_query($this->db,"INSERT INTO `users`( `name`, `email`, `password`, `role`) VALUES ('$this->name','$this->email','$this->password','$this->role')");
         return $this->GetUser(email:$this->email,password:$this->password);
     }
+    // end create
+    // GetUser
     public function GetUser($id=null,$email=null,$password=null){
         if($id !=null){
             $user_sql=mysqli_query($this->db,"SELECT * FROM users WHERE id ='{$id}' ");
@@ -44,6 +48,7 @@ class User
             return $user = mysqli_fetch_object($user_sql);
         }
     }
+    // end GetUser
 }
 // $a  =new User();
 // $a ->SetDb($conn);
