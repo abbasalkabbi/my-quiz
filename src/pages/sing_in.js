@@ -32,7 +32,7 @@ function Sing_in() {
             <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
             
           </div>
-          <p className="fs-4">Create an Account <a href="./">Sing Up</a></p>
+          <p className="fs-4">Create an Account <a href="./sing_up">Sing Up</a></p>
         </form>
       </div>
     </div>
