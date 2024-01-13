@@ -1,5 +1,7 @@
 <?php
+namespace App;
 require 'config.php';
+
 class User
 {
     public $id;
@@ -43,12 +45,12 @@ class User
         }
     }
 }
-$a  =new User();
-$a ->SetDb($conn);
-var_dump($a->create((object) array(
-    "name"=>"abbas",
-    "email"=>"email",
-    "password"=>"password",
-    "role"=>"role",)));
+// $a  =new User();
+// $a ->SetDb($conn);
+// var_dump($a->create((object) array(
+//     "name"=>"abbas",
+//     "email"=>"email",
+//     "password"=>"password",
+//     "role"=>"role",)));
     
 ?>
