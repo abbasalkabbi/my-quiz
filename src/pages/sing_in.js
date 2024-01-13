@@ -30,7 +30,9 @@ function Sing_in() {
           <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
           <div class="divider d-flex align-items-center my-4">
             <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+            
           </div>
+          <p className="fs-4">Create an Account <a href="./">Sing Up</a></p>
         </form>
       </div>
     </div>
