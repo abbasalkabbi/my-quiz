@@ -1,5 +1,6 @@
 
 import { NavLink, Outlet } from "react-router-dom";
+import Header_guest from "../components/header/header_guest";
 
 function Layout() {
     return (
@@ -13,7 +14,7 @@ function Layout() {
                     </button>
                   {/* llist */}
                 <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
                             <NavLink
                     			to='/'
@@ -29,6 +30,11 @@ function Layout() {
                   			</NavLink>
                          </li>
                     </ul>
+                     {/* Right */}
+                    <div class="d-flex align-items-center">
+                                    <Header_guest/>
+                    </div>
+                    {/* Right End */}
                 </div>
                   {/* end ist */}
                 </div>
