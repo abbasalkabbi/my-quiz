@@ -119,7 +119,7 @@ class Sing_up extends Component{
                 </div>
             )
         }
-            if(this.state.info==='successful'){
+            if(this.state.message==='successful'){
                 localStorage.setItem('id',this.state.id)
                 localStorage.setItem('avatar',this.state.avatar)
                 if(localStorage.getItem('id')){
