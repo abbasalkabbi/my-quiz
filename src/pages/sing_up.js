@@ -1,6 +1,7 @@
 import { Component } from "react";
 import "../css/sing_up.css"
 import axios from "axios";
+import { Navigate } from "react-router";
 class Sing_up extends Component{
     constructor(){
         super();
@@ -54,21 +55,43 @@ class Sing_up extends Component{
             data: register_data
         })
         .then(result =>
-            { console.log(result.data)
+            { console.log(result.data.user.id)
             this.setState({
             info: result.data.message,
             status:result.data.status,
-            id:result.data.id,
+            id:result.data.user.id,
             })
         }
             )
         
+    }
+    // error
+    error(){
+        if(this.state.status ===false){
+            return(
+                <div class="alert  alert-danger alert-dismissible fade show text-center" role="alert">
+                {this.state.info}
+                </div>
+            )
+        }else
+        {
+            if(this.state.info==='successful'){
+                localStorage.setItem('id',this.state.id)
+                localStorage.setItem('avatar',this.state.avatar)
+                if(localStorage.getItem('id')){
+                return(
+                <Navigate replace to="/" />
+                )
+            }
+            }
+        }
     }
     render(){
         let {name,role,email,password}=this.state
         return(
             // section
             <section class="vh-100 bg-sing-up">
+                {localStorage.getItem('id')?<Navigate replace to="/" />:''}
                 {/* mask */}
                 <div class="mask d-flex align-items-center h-100 gradient-custom-3">
                     {/* container */}
@@ -84,6 +107,9 @@ class Sing_up extends Component{
                                         {/* h2 title */}
                                         <h2 class="text-uppercase text-center mb-5">Create an account</h2>
                                         {/* end title */}
+                                        {/* error */}
+                                        {this.error()}
+                                        {/* error end */}
                                         {/* start form */}
                                         <form>
                                             <div class="form-outline mb-4">

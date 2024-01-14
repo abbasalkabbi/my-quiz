@@ -35,7 +35,7 @@ if($_POST){
                                                         "role"=>$role,)
                                                 );
                                         // get user
-                                        echo json_encode($user->GetUser(email:$email,password:$password));
+                                        echo json_encode(['status'=>true,"message" => "successful","user" =>$user->GetUser(email:$email,password:$password)]);
                                 }else{
                                         // password short
                                         echo json_encode(['status'=>false,"message" => "password is  Short"]);
