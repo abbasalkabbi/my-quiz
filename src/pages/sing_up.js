@@ -39,9 +39,8 @@ class Sing_up extends Component{
     }
     // 
      // handleFormSubmit
-     handleFormSubmit(event){
+    handleFormSubmit(event){
         event.preventDefault();
-        console.log('ss')
         let register_data={
             name: this.state.name,
             email: this.state.email,
@@ -55,12 +54,20 @@ class Sing_up extends Component{
             data: register_data
         })
         .then(result =>
-            { console.log(result.data.user.id)
-            this.setState({
-            info: result.data.message,
-            status:result.data.status,
-            id:result.data.user.id,
-            })
+            { console.log(result.data)
+                if(result.data.status ==true){
+                this.setState({
+                    info: result.data.message,
+                    status:result.data.status,
+                    id:result.data.user.id,
+                    })
+            }else{
+                this.setState({
+                    info: result.data.message,
+                    status:result.data.status,
+                    })
+            }
+            
         }
             )
         

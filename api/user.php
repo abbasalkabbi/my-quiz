@@ -41,11 +41,20 @@ class User
     public function GetUser($id=null,$email=null,$password=null){
         if($id !=null){
             $user_sql=mysqli_query($this->db,"SELECT * FROM users WHERE id ='{$id}' ");
-            return $user = mysqli_fetch_object($user_sql);
+            if(mysqli_num_rows($user_sql) >0){
+                return $user = mysqli_fetch_object($user_sql);
+            }else{
+                return false;
+            }
         }
         if($email !=null && $password !=null){
             $user_sql=mysqli_query($this->db,"SELECT * FROM users WHERE email ='{$email}' AND password = '{$password}'");
-            return $user = mysqli_fetch_object($user_sql);
+            if(mysqli_num_rows($user_sql) >0){
+                return $user = mysqli_fetch_object($user_sql);
+            }else{
+                return false;
+            }
+            
         }
     }
     // end GetUser

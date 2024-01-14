@@ -1,7 +1,82 @@
 import React from "react";
+import { Component } from "react";
+import axios from "axios";
 import '../css/sing_in.css'
 import { Navigate } from "react-router";
-function Sing_in() {
+class Sing_in extends Component{
+  constructor(){
+    super();
+    this.state={
+        email:'',
+        password:'',
+    }
+}
+ // set email
+setEmail(e){
+  this.setState({
+      email:e.target.value
+  })
+}
+// set password
+setPassword(e){
+  this.setState({
+      password:e.target.value
+  })
+}
+// handleFormSubmit
+handleFormSubmit(event){
+  event.preventDefault();
+  let register_data={
+      email: this.state.email,
+      password:this.state.password,
+  }
+  axios({
+      method: 'post',
+      url: `http://localhost/my-quiz/api/sing_in.php`,
+      headers: { 'content-type': 'application/json' },
+      data: register_data
+  })
+  .then(result =>
+      { console.log(result.data)
+        if(result.data.status ==true){
+        this.setState({
+            info: result.data.message,
+            status:result.data.status,
+            id:result.data.user.id,
+            })
+    }else{
+        this.setState({
+            info: result.data.message,
+            status:result.data.status,
+            })
+    }
+  }
+      )
+  
+}
+// error
+error(){
+  if(this.state.status ===false){
+      return(
+          <div class="alert  alert-danger alert-dismissible fade show text-center" role="alert">
+          {this.state.info}
+          </div>
+      )
+  }else
+  {
+      if(this.state.info==='successful'){
+          localStorage.setItem('id',this.state.id)
+          localStorage.setItem('avatar',this.state.avatar)
+          if(localStorage.getItem('id')){
+          return(
+          <Navigate replace to="/" />
+          )
+      }
+      }
+  }
+}
+  render(){
+    let {email,password}=this.state
     return (
         <>
         <section class="vh-100">
@@ -14,14 +89,20 @@ function Sing_in() {
               </div>
               <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                 <form>
+                  {/* error */}
+                  {this.error()}
+                  {/* error end */}
                   {/* <!-- Email input --> */}
                   <div class="form-outline mb-4">
-                    <input type="email" id="form1Example13" class="form-control form-control-lg" />
+                    <input type="email" id="form1Example13" class="form-control form-control-lg"
+                      name="email" onChange={this.setEmail.bind(this)} value={email}/>
                     <label class="form-label" for="form1Example13">Email address</label>
                   </div>
                   {/* <!-- Password input --> */}
                   <div class="form-outline mb-4">
-                    <input type="password" id="form1Example23" class="form-control form-control-lg" />
+                    <input type="password" id="form1Example23" class="form-control form-control-lg" 
+                    name="password" value={password} onChange={this.setPassword.bind(this)}
+                    />
                     <label class="form-label" for="form1Example23">Password</label>
                   </div>
                   <div class="d-flex justify-content-around align-items-center mb-4">
@@ -29,7 +110,7 @@ function Sing_in() {
                     <a href="#!">Forgot password?</a>
                   </div>
                   {/* <!-- Submit button --> */}
-                  <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+                  <button type="submit" class="btn btn-primary btn-lg btn-block" onClick={e => this.handleFormSubmit(e)}>Sign in</button>
                   <div class="divider d-flex align-items-center my-4">
                     <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                     
@@ -42,5 +123,6 @@ function Sing_in() {
         </section>
         </>
     );
+  }
 }
 export default Sing_in;
