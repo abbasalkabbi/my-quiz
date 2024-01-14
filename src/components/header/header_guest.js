@@ -4,13 +4,13 @@ function Header_guest(){
     return(
         <>
         <NavLink
-            to='/singin'
+            to='/sing_in'
             className="btn btn-info px-3 me-2"
             >
             Login
         </NavLink>
         <NavLink
-            to='/register'
+            to='/sing_up'
             className="btn btn-primary me-3"
             >
             Sign up for free
