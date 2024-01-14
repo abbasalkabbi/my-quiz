@@ -9,6 +9,7 @@ function App() {
   const url_base='http://localhost/my-quiz/api/'
   const url = {
     Login:`${url_base}Login.php`,
+    avatar:`${url_base}avatars/`
     };
   return (
     <div className="App">

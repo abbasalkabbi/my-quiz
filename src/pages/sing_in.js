@@ -9,6 +9,8 @@ class Sing_in extends Component{
     this.state={
         email:'',
         password:'',
+        avatar:'',
+        status:'',
     }
 }
  // set email
@@ -43,6 +45,7 @@ handleFormSubmit(event){
             info: result.data.message,
             status:result.data.status,
             id:result.data.user.id,
+            avatar:result.data.user.avatar,
             })
     }else{
         this.setState({
@@ -68,9 +71,7 @@ error(){
           localStorage.setItem('id',this.state.id)
           localStorage.setItem('avatar',this.state.avatar)
           if(localStorage.getItem('id')){
-          return(
-          <Navigate replace to="/" />
-          )
+            window.location.reload(false);
       }
       }
   }

@@ -1,8 +1,13 @@
-
+import React from 'react';
+import {useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import Header_guest from "../components/header/header_guest";
+import Header_logined from "../components/header/header_logined"
+import Context from "../Context";
 
 function Layout() {
+    console.log(useContext(Context).avatar)
+    const url=useContext(Context).avatar;
     return (
         <>
             {/* nav */}
@@ -22,18 +27,11 @@ function Layout() {
                  				Home
                  			</NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink
-                  				to='/Sing_in'
-                  				className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-                  				Sing_in
-                  			</NavLink>
-                         </li>
                     </ul>
                      {/* Right */}
                     <div class="d-flex align-items-center">
                     {
-                    localStorage.getItem('id')?"Your are logined"
+                    localStorage.getItem('id')?<Header_logined url_img={`${url}${localStorage.getItem('avatar')}`}/>
                     :<Header_guest/>
                     }
                     </div>

@@ -96,6 +96,7 @@ class Sing_up extends Component{
                     message: result.data.message,
                     status:result.data.status,
                     id:result.data.user.id,
+                    avatar:result.data.user.avatar,
                     ShowEroor:false,
                     })
             }else{
@@ -123,9 +124,7 @@ class Sing_up extends Component{
                 localStorage.setItem('id',this.state.id)
                 localStorage.setItem('avatar',this.state.avatar)
                 if(localStorage.getItem('id')){
-                return(
-                <Navigate replace to="/" />
-                )
+                    window.location.reload(false);
             }
             }
     }
