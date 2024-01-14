@@ -9,6 +9,7 @@ class User
     public $email;
     private $password;
     public $role;
+    public $avatar;
     public $db;
     // set 
     private function SetName($name){
@@ -23,6 +24,9 @@ class User
     private function SetRole($role){
         return $this->role=$role;
     }
+    private function SetAvatar($avatar){
+        return $this->avatar=$avatar;
+    }
     public function SetDb($db){
         return $this->db=$db;
     }
@@ -33,7 +37,8 @@ class User
         $this->SetEmail($user->email);
         $this->SetPassword($user->password);
         $this->SetRole($user->role);
-        $register=mysqli_query($this->db,"INSERT INTO `users`( `name`, `email`, `password`, `role`) VALUES ('$this->name','$this->email','$this->password','$this->role')");
+        $this->SetAvatar($user->avatar);
+        $register=mysqli_query($this->db,"INSERT INTO `users`( `name`, `email`, `password`, `role`,`avatar`) VALUES ('$this->name','$this->email','$this->password','$this->role','$this->avatar')");
         return $this->GetUser(email:$this->email,password:$this->password);
     }
     // end create

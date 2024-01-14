@@ -10,7 +10,12 @@ class Sing_up extends Component{
             email:'',
             password:'',
             role:'',
+            avatar:'',
+            message:'',
+            image_status:false,
+            ShowEroor:false,
         }
+        this.img_upload = this.img_upload.bind(this);
     }
     // set role
     setRole(event) {
@@ -38,6 +43,36 @@ class Sing_up extends Component{
         })
     }
     // 
+    // upload img
+    img_upload(e){
+        let files = e.target.files;//get file
+        // check is img
+        let extension=['jpg','jpeg','png'];  //acceptable file types
+        let file_type=files[0].type.split('/').pop().toLowerCase(),
+            isSuccess = extension.indexOf(file_type) > -1;  //is extension in acceptable types
+        if(isSuccess){
+            // if is img
+            let fileReader = new FileReader();
+            fileReader.readAsDataURL(files[0]);
+            fileReader.onload = (event) => {
+                this.setState({
+                    avatar: event.target.result,
+                    image_status:true,
+                    message:'',
+                    ShowEroor:false,
+                })
+            }
+        }else{
+            // if not img
+            this.setState({
+                ShowEroor:true,
+                status:false,
+                message:'thumbe is not image',
+                avatar: '',
+                image_status:false,
+            })
+        }
+        }
      // handleFormSubmit
     handleFormSubmit(event){
         event.preventDefault();
@@ -46,6 +81,7 @@ class Sing_up extends Component{
             email: this.state.email,
             password:this.state.password,
             role:this.state.role,
+            avatar:this.state.avatar,
         }
         axios({
             method: 'post',
@@ -57,14 +93,16 @@ class Sing_up extends Component{
             { console.log(result.data)
                 if(result.data.status ==true){
                 this.setState({
-                    info: result.data.message,
+                    message: result.data.message,
                     status:result.data.status,
                     id:result.data.user.id,
+                    ShowEroor:false,
                     })
             }else{
                 this.setState({
-                    info: result.data.message,
+                    message: result.data.message,
                     status:result.data.status,
+                    ShowEroor:true,
                     })
             }
             
@@ -74,14 +112,13 @@ class Sing_up extends Component{
     }
     // error
     error(){
-        if(this.state.status ===false){
+        if(this.state.status ===false && this.state.ShowEroor ==true){
             return(
                 <div class="alert  alert-danger alert-dismissible fade show text-center" role="alert">
-                {this.state.info}
+                {this.state.message}
                 </div>
             )
-        }else
-        {
+        }
             if(this.state.info==='successful'){
                 localStorage.setItem('id',this.state.id)
                 localStorage.setItem('avatar',this.state.avatar)
@@ -91,7 +128,6 @@ class Sing_up extends Component{
                 )
             }
             }
-        }
     }
     render(){
         let {name,role,email,password}=this.state
@@ -155,6 +191,11 @@ class Sing_up extends Component{
                                             </div>
                                                 
                                             {/*  end opation*/}
+                                             {/* upload thumbe */}
+                                                <div class="mb-5">
+                                                    <label for="thumbe" class="form-label"> Your Image </label>
+                                                    <input class="form-control" type="file" id="formFile"  onChange={this.img_upload}/>
+                                                </div>
                                             {/* submit */}
                                             <div class="d-flex justify-content-center">
                                                 <button type="submit"
