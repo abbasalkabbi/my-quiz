@@ -32,7 +32,10 @@ function Layout() {
                     </ul>
                      {/* Right */}
                     <div class="d-flex align-items-center">
-                                    <Header_guest/>
+                    {
+                    localStorage.getItem('id')?"Your are logined"
+                    :<Header_guest/>
+                    }
                     </div>
                     {/* Right End */}
                 </div>
