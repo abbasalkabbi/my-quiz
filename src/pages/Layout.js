@@ -27,6 +27,13 @@ function Layout() {
                  				Home
                  			</NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink
+                    			to='/quiz'
+                    			className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+                 			   Quiz
+                 		   </NavLink>
+                        </li>
                     </ul>
                      {/* Right */}
                     <div class="d-flex align-items-center">

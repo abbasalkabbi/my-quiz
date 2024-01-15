@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Context from "./Context";
 import Sing_in from "./pages/sing_in";
 import Sing_up from "./pages/sing_up";
+import Quiz from "./pages/Quiz";
 function App() {
   const url_base='http://localhost/my-quiz/api/'
   const url = {
@@ -20,6 +21,7 @@ function App() {
                 <Route index element={<Home/>}/>
                 <Route path="Sing_in" element={<Sing_in/>}/>
                 <Route path="Sing_up" element={<Sing_up/>}/>
+                <Route path="quiz/:id_quiz" element={<Quiz/>}/>
             </Route>
           </Routes>
         </BrowserRouter> 
