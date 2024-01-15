@@ -57,7 +57,7 @@ function Header_logined(props){
                             </NavLink>
                         </li></li>
                         <li><hr class="dropdown-divider"/></li>
-                        <li ><button class="dropdown-item " onClick={()=>logout()}>Log out</button></li>
+                        <li ><button class="dropdown-item text-danger" onClick={()=>logout()}>Log out</button></li>
                     </ul>
                     {/* ul end  */}
                 </div>
