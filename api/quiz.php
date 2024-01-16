@@ -35,6 +35,26 @@ class Quiz
             return false;
         }
         // end create
+        // get Get_Quiz
+        public function Get_Quiz($id_quiz=null , $id_author=null ,$name =null){
+            // get by name
+            if($id_author !=null && $name !=null){
+                $quiz_sql=mysqli_query($this->db,"SELECT * FROM quiz WHERE id_author ='{$id_author}' AND name = '{$name}'");
+                if(mysqli_num_rows($quiz_sql) >0){
+                    return $quiz = mysqli_fetch_object($quiz_sql);
+                }
+                    return false;
+            }
+            // get by id
+            if($id_quiz != null){
+                $quiz_sql=mysqli_query($this->db,"SELECT * FROM quiz WHERE id_quiz ='{$id_quiz}'");
+                if(mysqli_num_rows($quiz_sql) >0){
+                    return $quiz = mysqli_fetch_object($quiz_sql);
+                }
+                return false;
+            }
+        }
+        // end Get_Quiz
         // create_Question
         public function create_Question($question){
         $this->SetId_Quiz($question->id_quiz);
@@ -43,6 +63,7 @@ class Quiz
         return false;
         }
         // end create_Question
+        
         // create_Answer
         public function create_Answer($answer){
             $this->SetId_Question($answer->id_question);
