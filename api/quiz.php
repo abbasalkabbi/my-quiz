@@ -63,7 +63,27 @@ class Quiz
         return false;
         }
         // end create_Question
-        
+        // Get question
+        public function Get_Question($id_question,$id_quiz=null,$question=null){
+            // get by id_question
+            if($id_question !=null){
+                $question_sql=mysqli_query($this->db,"SELECT * FROM question WHERE id_question ='{$id_question}'");
+                if(mysqli_num_rows($question_sql) >0){
+                    return $question = mysqli_fetch_object($question_sql);
+                }
+                    return false;
+            }
+            // get by id_question end
+            // get id_quiz nd question
+            if($id_quiz !=null && $question !=null){
+                $question_sql=mysqli_query($this->db,"SELECT * FROM question WHERE id_quiz ='{$id_quiz}' AND question='$question'");
+                if(mysqli_num_rows($question_sql) >0){
+                    return $question = mysqli_fetch_object($question_sql);
+                }
+                    return false;
+            }
+        }
+        // Get question End 
         // create_Answer
         public function create_Answer($answer){
             $this->SetId_Question($answer->id_question);
@@ -71,5 +91,24 @@ class Quiz
             return false;
             }
         // end create_Answer
+        public function Get_Answer($id_answer=null,$id_question=null,$answer=null){
+                // get by id_answer
+                if($id_answer !=null){
+                    $answer_sql=mysqli_query($this->db,"SELECT * FROM answer WHERE id_answer ='{$id_answer}'");
+                    if(mysqli_num_rows($answer_sql) >0){
+                        return $answer = mysqli_fetch_object($answer_sql);
+                    }
+                        return false;
+                }
+                // get by id_answer end
+                // get id_question end answer
+                if($id_question !=null && $answer !=null){
+                    $question_sql=mysqli_query($this->db,"SELECT * FROM answer WHERE id_question ='{$id_question}' AND question='$answer'");
+                    if(mysqli_num_rows($question_sql) >0){
+                        return $question = mysqli_fetch_object($question_sql);
+                    }
+                        return false;
+                }
+        }
 }
 ?>
