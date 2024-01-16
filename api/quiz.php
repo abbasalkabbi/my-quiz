@@ -30,7 +30,6 @@ class Quiz
         // create
         public function create_Quiz($quiz){
             $this->SetId_Author($quiz->id_author);
-            // $this->SetId_Quiz($quiz->id_quiz);
             $this->Set_Name($quiz->quiz_name);
             $SetQuiz=mysqli_query($this->db,"INSERT INTO `quiz`(`id_author`,`name`) VALUES ('$this->id_author','$this->quiz_name')");
             return false;
@@ -44,5 +43,12 @@ class Quiz
         return false;
         }
         // end create_Question
+        // create_Answer
+        public function create_Answer($answer){
+            $this->SetId_Question($answer->id_question);
+            $Set_answer=mysqli_query($this->db,"INSERT INTO `answer`(`id_question`,`answer`,`is_true`) VALUES ('$this->id_question','$answer->answer','$answer->is_true')");
+            return false;
+            }
+        // end create_Answer
 }
 ?>
