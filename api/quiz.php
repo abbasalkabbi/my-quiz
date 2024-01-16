@@ -32,7 +32,7 @@ class Quiz
             $this->SetId_Author($quiz->id_author);
             $this->Set_Name($quiz->quiz_name);
             $SetQuiz=mysqli_query($this->db,"INSERT INTO `quiz`(`id_author`,`name`) VALUES ('$this->id_author','$this->quiz_name')");
-            return false;
+            return $this->Get_Quiz( id_author:$this->id_author ,name:$this->quiz_name);
         }
         // end create
         // get Get_Quiz
@@ -60,11 +60,11 @@ class Quiz
         $this->SetId_Quiz($question->id_quiz);
         $this->SetQuestion($question->question);
         $Set_question=mysqli_query($this->db,"INSERT INTO `question`(`id_quiz`,`question`,) VALUES ('$this->id_quiz','$this->question')");
-        return false;
+        return $this->Get_Question(id_quiz:$this->id_quiz,question:$this->question);
         }
         // end create_Question
         // Get question
-        public function Get_Question($id_question,$id_quiz=null,$question=null){
+        public function Get_Question($id_question=null,$id_quiz=null,$question=null){
             // get by id_question
             if($id_question !=null){
                 $question_sql=mysqli_query($this->db,"SELECT * FROM question WHERE id_question ='{$id_question}'");
@@ -88,7 +88,7 @@ class Quiz
         public function create_Answer($answer){
             $this->SetId_Question($answer->id_question);
             $Set_answer=mysqli_query($this->db,"INSERT INTO `answer`(`id_question`,`answer`,`is_true`) VALUES ('$this->id_question','$answer->answer','$answer->is_true')");
-            return false;
+            return $this->Get_Answer(id_question:$this->id_question,answer:$answer->answer);
             }
         // end create_Answer
         public function Get_Answer($id_answer=null,$id_question=null,$answer=null){
