@@ -15,4 +15,10 @@ if(isset($_GET['id_question'])){
     $Get_Answer=$Quiz->Get_Answer(id_question:$id_question);
     echo json_encode($Get_Answer);
 }
+if(isset($_GET['id_user']) && isset($_GET['id_quiz'])){
+    $id_quiz=$_GET['id_quiz'];
+    $id_user=$_GET['id_user'];
+    $comp=mysqli_query($conn,"INSERT INTO `quiz_user`(`id_quiz`,`id_user`) VALUES ('$id_quiz','$id_user')");
+    echo json_encode(['staus'=>true]);
+}
 ?>

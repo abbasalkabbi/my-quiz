@@ -103,6 +103,7 @@ import { useState ,useEffect, useContext, useCallback } from "react"
 import { useParams } from 'react-router-dom';
 import Context from "../Context";
 import CardQuiz from "../components/CardQuiz"
+import { Navigate } from "react-router";
 export default function Quiz(){
     const id_quiz=useParams().id
     const id_answer=useParams().id_answer
@@ -112,8 +113,10 @@ export default function Quiz(){
     const[finshed,SetFinsed]=useState(false);
     const[q_finshed,Set_q_Finsed]=useState(false);
     const [is_next,SetNext]=useState(false);
+    const [Done,SetDone]=useState(false);
     const [count,SetCount]=useState(0);
     const [title,SetTitle]=useState();
+    const [complet,Setcomplet]=useState();
 
 //   // get user from api
     useEffect(()=>{
@@ -122,6 +125,7 @@ export default function Quiz(){
         .then(res =>{
             console.log(res)
             SetQuestion(res.question)
+            Setcomplet(`${url}id_user=${localStorage.getItem('id')}&id_quiz=${res.quiz.id_quiz}`)
             SetCount(res.question.length)
             SetFinsed(true)
         })
@@ -151,17 +155,25 @@ function mapping(){
     />)
     }
 }
+function comp(){
+    fetch(`${complet}`)
+    .then(res=>res.json())
+    .then(res =>{
+        SetDone(res.staus)
+    })
+}
 function Next(){
     if(is_next ==true){
         if(id_answer <count){
             return  (<a className="page-link bg-primary p-2 bg-gradient text-bg-primary" href={`/quiz/${id_quiz}/`+(parseInt(id_answer)+1)}>Next &#8250;</a>)
         }else{
-            return (<a className="page-link bg-primary p-2 bg-gradient text-bg-primary" href={`/quiz/${id_quiz}/`+(parseInt(id_answer)+1)}>Done &#8250;</a>)
+            return (<a className="page-link bg-primary p-2 bg-gradient text-bg-primary" onClick={comp}>Done &#8250;</a>)
         }
     }
 }
     return(
         <div className="container">
+        {Done?<Navigate replace to="/" />:''}
         <div className="d-flex justify-content-evenly align-items-center">
             <p className="w-10">{id_answer}/{count}</p>
             <p className="w-75 text-center fs-1">{title}</p>
