@@ -1,16 +1,15 @@
 import React from "react";
 
 
-function CardQuiz(props){
+function CardQuiz({answer,action,is_true,sty}){
 return(
     <div class="col-sm-6 mb-3 col-lg-6">
-        <div class="card">
-            <div class="card-body d-flex justify-content-center align-items-center">
-                <p>How it is work</p>
+        <div class={`card ${sty}`}>
+            <div class="card-body d-flex justify-content-center align-items-center"  onClick={action}>
+                <p >{answer}</p>
             </div>
         </div>
     </div>
 )
 }
-
-export default CardQuiz;
+export default React.memo(CardQuiz)

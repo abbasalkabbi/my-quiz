@@ -3,11 +3,11 @@ namespace App;
 require 'config.php';
 class Quiz 
 {
-    public $id_author;
-    public $id_quiz;
-    public $quiz_name;
-    public $question;
-    public $id_question;
+    public $id_author=null;
+    public $id_quiz=null;
+    public $quiz_name=null;
+    public $question=null;
+    public $id_question=null;
     public $db;
     private function SetId_Author($id_author){
         return $this->id_author=$id_author;
@@ -41,7 +41,10 @@ class Quiz
             if($id_author !=null && $name !=null){
                 $quiz_sql=mysqli_query($this->db,"SELECT * FROM quiz WHERE id_author ='{$id_author}' AND name = '{$name}'");
                 if(mysqli_num_rows($quiz_sql) >0){
-                    return $quiz = mysqli_fetch_object($quiz_sql);
+                    $quiz = mysqli_fetch_object($quiz_sql);
+                    $this->SetId_Quiz(1);
+                    $this->Set_Name($quiz->name);
+                    return $quiz;
                 }
                     return false;
             }
@@ -49,7 +52,10 @@ class Quiz
             if($id_quiz != null){
                 $quiz_sql=mysqli_query($this->db,"SELECT * FROM quiz WHERE id_quiz ='{$id_quiz}'");
                 if(mysqli_num_rows($quiz_sql) >0){
-                    return $quiz = mysqli_fetch_object($quiz_sql);
+                    $quiz = mysqli_fetch_object($quiz_sql);
+                    $this->SetId_Quiz($quiz->id_quiz);
+                    $this->Set_Name($quiz->name);
+                    return $quiz;
                 }
                 return false;
             }
@@ -78,7 +84,16 @@ class Quiz
             if($id_quiz !=null && $question !=null){
                 $question_sql=mysqli_query($this->db,"SELECT * FROM question WHERE id_quiz ='{$id_quiz}' AND question='$question'");
                 if(mysqli_num_rows($question_sql) >0){
-                    return $question = mysqli_fetch_object($question_sql);
+                    $question = mysqli_fetch_object($question_sql);
+                    return $question ;
+                }
+                    return false;
+            }
+            if($id_quiz){
+                $question_sql=mysqli_query($this->db,"SELECT * FROM question WHERE id_quiz ='{$id_quiz}' ");
+                if(mysqli_num_rows($question_sql) >0){
+                    $question = mysqli_fetch_all($question_sql,MYSQLI_ASSOC);
+                    return $question;
                 }
                     return false;
             }
@@ -109,6 +124,17 @@ class Quiz
                     }
                         return false;
                 }
+                if($id_question !=null){
+                    $question_sql=mysqli_query($this->db,"SELECT * FROM answer WHERE id_question ='{$id_question}'");
+                    if(mysqli_num_rows($question_sql) >0){
+                        return $question = mysqli_fetch_all($question_sql,MYSQLI_ASSOC);
+                    }
+                        return false;
+                }
         }
 }
+// $a =new Quiz();
+// $a->SetDb($conn);
+// $d=$a->Get_Question(id_quiz:1);
+// echo ($d);
 ?>

@@ -10,6 +10,7 @@ function App() {
   const url_base='http://localhost/my-quiz/api/'
   const url = {
     Login:`${url_base}Login.php`,
+    get_quiz:`${url_base}get_quiz.php?`,
     avatar:`${url_base}avatars/`
     };
   return (
@@ -21,7 +22,7 @@ function App() {
                 <Route index element={<Home/>}/>
                 <Route path="Sing_in" element={<Sing_in/>}/>
                 <Route path="Sing_up" element={<Sing_up/>}/>
-                <Route path="quiz/:id_quiz" element={<Quiz/>}/>
+                <Route path="quiz/:id/:id_answer" element={<Quiz/>}/>
             </Route>
           </Routes>
         </BrowserRouter> 
