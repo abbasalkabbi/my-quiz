@@ -1,7 +1,7 @@
 import React from "react";
 
 
-function CardQuiz({answer,action,is_true,sty,styl}){
+function CardAnswer({answer,action,is_true,sty,styl}){
 return(
     <div class="col-sm-6 mb-3 col-lg-6">
         <div class={`card ${sty} ${styl}`}>
@@ -12,4 +12,4 @@ return(
     </div>
 )
 }
-export default React.memo(CardQuiz)
+export default React.memo(CardAnswer)

@@ -2,7 +2,7 @@
 import { useState ,useEffect, useContext, useCallback } from "react"
 import { useParams } from 'react-router-dom';
 import Context from "../Context";
-import CardQuiz from "../components/CardAnswe"
+import CardAnswer from "../components/CardAnswer"
 import { Navigate } from "react-router";
 export default function TackQuiz(){
     const id_quiz=useParams().id
@@ -51,8 +51,7 @@ const is_true=useCallback(()=>SetNext(true),[is_next]);
 const is_false=useCallback(()=>SetNext(false),[is_next]);
 function mapping(){
     if(q_finshed ==true){
-        return question.map(e=><CardQuiz answer={`${e.answer}`} action={e.is_true==1?is_true:is_false} is_true={`${e.is_true}`} sty={e.is_true==1&&is_next==true?"bg-success":''}
-    />)
+        return question.map(e=><CardAnswer answer={`${e.answer}`} action={e.is_true==1?is_true:is_false} is_true={`${e.is_true}`} sty={e.is_true==1&&is_next==true?"bg-success":''}/>)
     }
 }
 function comp(){
