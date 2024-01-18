@@ -2,7 +2,7 @@
 import { useState ,useEffect, useContext, useCallback } from "react"
 import { useParams } from 'react-router-dom';
 import Context from "../Context";
-import CardQuiz from "../components/CardQuiz"
+import CardQuiz from "../components/CardAnswe"
 import { Navigate } from "react-router";
 export default function TackQuiz(){
     const id_quiz=useParams().id
