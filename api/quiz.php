@@ -59,6 +59,9 @@ class Quiz
                 }
                 return false;
             }
+            $quiz_sql=mysqli_query($this->db,"SELECT * FROM quiz");
+            $quiz = mysqli_fetch_all($quiz_sql,MYSQLI_ASSOC);
+            return $quiz;
         }
         // end Get_Quiz
         // create_Question

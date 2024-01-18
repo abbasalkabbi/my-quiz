@@ -21,4 +21,10 @@ if(isset($_GET['id_user']) && isset($_GET['id_quiz'])){
     $comp=mysqli_query($conn,"INSERT INTO `quiz_user`(`id_quiz`,`id_user`) VALUES ('$id_quiz','$id_user')");
     echo json_encode(['staus'=>true]);
 }
+if(!isset($_GET['id_user']) && !isset($_GET['id_quiz']) && !isset($_GET['id'])){
+    $Quiz=new Quiz();
+    $Quiz->SetDb($conn);
+    $q=$Quiz->Get_Quiz();
+    echo json_encode($q);
+}
 ?>
