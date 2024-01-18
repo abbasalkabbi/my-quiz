@@ -15,9 +15,14 @@ export default function Quiz(){
         return (()=>false)
     },[])
     function mapping(){
-        return Quiz.map((e)=><CardQuiz/>)
+        return Quiz.map((e)=><CardQuiz id={e.id_quiz} name={e.name}/>)
     }
     return(<>
-    {mapping()}
+    <div className="container">
+        <h1 className="text-center mt-1 mb-2">Quiz</h1>
+        <div className="row">
+        {mapping()}
+        </div>
+    </div>
         </>)
 }
