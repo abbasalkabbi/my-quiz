@@ -1,11 +1,16 @@
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 import axios from "axios";
 import { Navigate } from "react-router";
+import CreateQuistion from "../components/CreateQuistion";
 
 function CreateQuiz(){
 
     const [Name,SetName]=useState();
+    const [Quistions,SetQuistions]=useState([]);
     const id_author=localStorage.getItem('id');
+    const Set=(e)=> {
+      SetQuistions(oldArray => [...oldArray, e]);
+    }
     function handleFormSubmit(e){
         e.preventDefault();
         let create_data={
@@ -13,14 +18,15 @@ function CreateQuiz(){
             id_author:id_author,
             quistions:[{question:'sss111',answer:[{answer:'dddd111',is_true:0},{answer:'dddd2',is_true:0}]},{question:'sss22',answer:[{answer:'dddd22',is_true:0}]}]
         }
-        axios({
-            method: 'post',
-            url: `http://localhost/my-quiz/api/CreateQuiz.php`,
-            headers: { 'content-type': 'application/json' },
-            data: create_data
-        })
-        .then(result =>console.log(result.data)
-        )
+        console.log(create_data)
+        // axios({
+        //     method: 'post',
+        //     url: `http://localhost/my-quiz/api/CreateQuiz.php`,
+        //     headers: { 'content-type': 'application/json' },
+        //     data: create_data
+        // })
+        // .then(result =>console.log(result.data)
+        // )
     }
     return (
     <>
@@ -52,6 +58,7 @@ function CreateQuiz(){
                                             />
                                             <label class="form-label" for="form3Example1cg">Your Name</label>
                                         </div>
+                          
                                       {/* submit */}
                                         <div class="d-flex justify-content-center">
                                             <button type="submit"
@@ -59,6 +66,7 @@ function CreateQuiz(){
                                         </div>
                                     </form>
                                       {/* end form */}
+                                      <CreateQuistion action={Set} text='ddd'/>
                                 </div>
                               {/* end card body */}
                             </div>
