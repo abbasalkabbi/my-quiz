@@ -10,14 +10,17 @@ function CreateQuiz(){
         e.preventDefault();
         let create_data={
             name: Name,
-            id_author:id_author
+            id_author:id_author,
+            quistions:[{question:'sss111',answer:[{answer:'dddd111',is_true:0},{answer:'dddd2',is_true:0}]},{question:'sss22',answer:[{answer:'dddd22',is_true:0}]}]
         }
         axios({
             method: 'post',
-            url: `http://localhost/my-quiz/api/register.php`,
+            url: `http://localhost/my-quiz/api/CreateQuiz.php`,
             headers: { 'content-type': 'application/json' },
             data: create_data
         })
+        .then(result =>console.log(result.data)
+        )
     }
     return (
     <>
@@ -42,7 +45,7 @@ function CreateQuiz(){
                                   {/* {this.error()} */}
                                   {/* error end */}
                                   {/* start form */}
-                                    <form>
+                                    <form action="POST">
                                         <div class="form-outline mb-4">
                                             <input type="text" id="form3Example1cg" class="form-control form-control-lg"
                                                 name="name" value={Name}  onChange={(e)=>SetName(e.target.value)}

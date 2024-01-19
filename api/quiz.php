@@ -28,9 +28,9 @@ class Quiz
         return $this->db=$db;
     }
         // create
-        public function create_Quiz($quiz){
-            $this->SetId_Author($quiz->id_author);
-            $this->Set_Name($quiz->quiz_name);
+        public function create_Quiz($id_author,$quiz_name){
+            $this->SetId_Author($id_author);
+            $this->Set_Name($quiz_name);
             $SetQuiz=mysqli_query($this->db,"INSERT INTO `quiz`(`id_author`,`name`) VALUES ('$this->id_author','$this->quiz_name')");
             return $this->Get_Quiz( id_author:$this->id_author ,name:$this->quiz_name);
         }
@@ -42,7 +42,7 @@ class Quiz
                 $quiz_sql=mysqli_query($this->db,"SELECT * FROM quiz WHERE id_author ='{$id_author}' AND name = '{$name}'");
                 if(mysqli_num_rows($quiz_sql) >0){
                     $quiz = mysqli_fetch_object($quiz_sql);
-                    $this->SetId_Quiz(1);
+                    $this->SetId_Quiz($quiz->id_quiz);
                     $this->Set_Name($quiz->name);
                     return $quiz;
                 }
@@ -65,10 +65,10 @@ class Quiz
         }
         // end Get_Quiz
         // create_Question
-        public function create_Question($question){
-        $this->SetId_Quiz($question->id_quiz);
-        $this->SetQuestion($question->question);
-        $Set_question=mysqli_query($this->db,"INSERT INTO `question`(`id_quiz`,`question`,) VALUES ('$this->id_quiz','$this->question')");
+        public function create_Question($id_quiz,$question){
+        $this->SetId_Quiz($id_quiz);
+        $this->SetQuestion($question);
+        $Set_question=mysqli_query($this->db,"INSERT INTO `question`( `id_quiz`, `question`) VALUES ('$this->id_quiz','$this->question')");
         return $this->Get_Question(id_quiz:$this->id_quiz,question:$this->question);
         }
         // end create_Question
@@ -88,6 +88,7 @@ class Quiz
                 $question_sql=mysqli_query($this->db,"SELECT * FROM question WHERE id_quiz ='{$id_quiz}' AND question='$question'");
                 if(mysqli_num_rows($question_sql) >0){
                     $question = mysqli_fetch_object($question_sql);
+                    $this->SetId_Question($question->id_question);
                     return $question ;
                 }
                     return false;
@@ -103,10 +104,10 @@ class Quiz
         }
         // Get question End 
         // create_Answer
-        public function create_Answer($answer){
-            $this->SetId_Question($answer->id_question);
-            $Set_answer=mysqli_query($this->db,"INSERT INTO `answer`(`id_question`,`answer`,`is_true`) VALUES ('$this->id_question','$answer->answer','$answer->is_true')");
-            return $this->Get_Answer(id_question:$this->id_question,answer:$answer->answer);
+        public function create_Answer($id_question,$answer,$is_true){
+            $this->SetId_Question($id_question);
+            $Set_answer=mysqli_query($this->db,"INSERT INTO `answer` (`id_answer`, `id_question`, `answer`, `is_true`) VALUES (NULL, '$id_question', '$answer', '$is_true');");
+            // return $this->Get_Answer(id_question:$this->id_question,answer:$answer);
             }
         // end create_Answer
         public function Get_Answer($id_answer=null,$id_question=null,$answer=null){
