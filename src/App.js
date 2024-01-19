@@ -7,6 +7,7 @@ import Sing_in from "./pages/sing_in";
 import Sing_up from "./pages/sing_up";
 import TackQuiz from "./pages/TackQuiz";
 import Quiz from "./pages/Quiz";
+import CreateQuiz from "./pages/CreateQuiz";
 function App() {
   const url_base='http://localhost/my-quiz/api/'
   const url = {
@@ -25,6 +26,7 @@ function App() {
                 <Route path="Sing_up" element={<Sing_up/>}/>
                 <Route path="quiz/:id/:id_answer" element={<TackQuiz/>}/>
                 <Route path="quiz/" element={<Quiz/>}/>
+                <Route path="createQuiz/" element={<CreateQuiz/>}/>
             </Route>
           </Routes>
         </BrowserRouter> 
