@@ -61,7 +61,7 @@ function CreateQuiz(){
     }
     return (
     <>
-        <section class="bg-sing-up" >
+        <section class="bg-sing-up " style={{"max-height": "fit-content","min-height":"100vh","height":"100vh"}}>
         {localStorage.getItem('id')?'':<Navigate replace to="/" />}
           {/* mask */}
             <div class="mask d-flex align-items-center h-100 gradient-custom-3">

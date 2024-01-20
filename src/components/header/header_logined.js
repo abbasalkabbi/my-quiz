@@ -50,10 +50,10 @@ function Header_logined(props){
                         </li>
                         <li><li>
                             <NavLink
-                            to='/upload'
+                            to='/createQuiz'
                             className='dropdown-item'
                             >
-                                Upload
+                                CreateQuiz
                             </NavLink>
                         </li></li>
                         <li><hr class="dropdown-divider"/></li>
