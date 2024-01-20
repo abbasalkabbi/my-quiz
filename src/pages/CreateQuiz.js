@@ -1,13 +1,18 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import axios from "axios";
 import { Navigate } from "react-router";
 import CreateQuistion from "../components/CreateQuistion";
 
 function CreateQuiz(){
-
     const [Name,SetName]=useState();
     const [Quistions,SetQuistions]=useState([]);
     const id_author=localStorage.getItem('id');
+    const [upload,Setupload]=useState(false);
+    const [val,setVal]=useState([]);
+    const handleAdd=()=>{
+      const abc=[...val,[]]
+      setVal(abc)
+  }
     const Set=(e)=> {
       SetQuistions(oldArray => [...oldArray, e]);
     }
@@ -18,7 +23,10 @@ function CreateQuiz(){
             id_author:id_author,
             quistions:[{question:'sss111',answer:[{answer:'dddd111',is_true:0},{answer:'dddd2',is_true:0}]},{question:'sss22',answer:[{answer:'dddd22',is_true:0}]}]
         }
-        console.log(create_data)
+        Setupload(true)
+        console.log(Quistions)
+        if(upload ==true){
+        }
         // axios({
         //     method: 'post',
         //     url: `http://localhost/my-quiz/api/CreateQuiz.php`,
@@ -30,7 +38,7 @@ function CreateQuiz(){
     }
     return (
     <>
-        <section class="vh-100 bg-sing-up">
+        <section class="bg-sing-up" >
         {localStorage.getItem('id')?'':<Navigate replace to="/" />}
           {/* mask */}
             <div class="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -58,15 +66,23 @@ function CreateQuiz(){
                                             />
                                             <label class="form-label" for="form3Example1cg">Your Name</label>
                                         </div>
-                          
+                                        {/* loop CreateQuistion */}
+                                        {val.map((data,i)=>{
+                                        return(<CreateQuistion action={Set}/>)
+                                      })
+                                      }
+                                      {/* ennd CreateQuistion */}
+                                      <div class="d-flex justify-content-center mt-2 mb-2">
+                                        <button type="button"  onClick={()=>handleAdd()}
+                                        class="text-white btn btn-primary  btn-lg" >Add anther Quistion </button>
+                                      </div>
                                       {/* submit */}
-                                        <div class="d-flex justify-content-center">
+                                      <div class="d-flex ">
                                             <button type="submit"
-                                            class="text-white btn btn-primary  btn-lg"  onClick={e => handleFormSubmit(e)}>Create </button>
+                                            class="text-white btn btn-primary  btn-lg"  onClick={e => handleFormSubmit(e)}>Upload </button>
                                         </div>
                                     </form>
-                                      {/* end form */}
-                                      <CreateQuistion action={Set} text='ddd'/>
+                                    {/* end form */}
                                 </div>
                               {/* end card body */}
                             </div>
