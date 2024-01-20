@@ -15,7 +15,7 @@ export default function Quiz(){
         return (()=>false)
     },[])
     function mapping(){
-        return Quiz.map((e)=><CardQuiz id={e.id_quiz} name={e.name}/>)
+        return Quiz.map((e)=><CardQuiz id={e.id_quiz} name={e.name} id_author={e.id_author}/>)
     }
     return(<>
     <div className="container">

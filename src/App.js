@@ -13,7 +13,8 @@ function App() {
   const url = {
     Login:`${url_base}Login.php`,
     get_quiz:`${url_base}get_quiz.php?`,
-    avatar:`${url_base}avatars/`
+    avatar:`${url_base}avatars/`,
+    delete_quiz:`${url_base}DeleteQuiz.php?id=`,
     };
   return (
     <div className="App">

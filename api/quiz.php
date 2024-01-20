@@ -64,6 +64,11 @@ class Quiz
             return $quiz;
         }
         // end Get_Quiz
+        // delete  quiz
+        public function Delete_Quiz($id_quiz=null){
+            $quiz_delete=mysqli_query($this->db,"DELETE   FROM quiz WHERE id_quiz ='{$id_quiz}'");
+        }
+        // delete  quiz End
         // create_Question
         public function create_Question($id_quiz,$question){
         $this->SetId_Quiz($id_quiz);
@@ -136,6 +141,7 @@ class Quiz
                         return false;
                 }
         }
+
 }
 // $a =new Quiz();
 // $a->SetDb($conn);
