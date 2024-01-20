@@ -30,18 +30,23 @@ function CreateQuiz(){
             id_author:id_author,
             quistions:Quistions,
         }
-        if(Quistions.length >0){
-          axios({
-            method: 'post',
-            url: `http://localhost/my-quiz/api/CreateQuiz.php`,
-            headers: { 'content-type': 'application/json' },
-            data: create_data
-            })
-            .then(result =>console.log(result.data)
-            )
+        if(Name){
+          if(Quistions.length >0){
+            axios({
+              method: 'post',
+              url: `http://localhost/my-quiz/api/CreateQuiz.php`,
+              headers: { 'content-type': 'application/json' },
+              data: create_data
+              })
+              .then(result =>console.log(result.data)
+              )
+          }else{
+            Set_is_error(true)
+            Set_error("quistions is empty")
+          }
         }else{
           Set_is_error(true)
-          Set_error("quistions is empty")
+          Set_error("Name quiz is empty")
         }
     }
       // error
