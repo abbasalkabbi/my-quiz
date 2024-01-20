@@ -7,12 +7,19 @@ function CreateQuiz(){
     const [Name,SetName]=useState();
     const [Quistions,SetQuistions]=useState([]);
     const id_author=localStorage.getItem('id');
-    const [upload,Setupload]=useState(false);
     const [val,setVal]=useState([]);
+    // error 
+    const [is_error , Set_is_error]=useState(false);
+    const [errors , Set_error]=useState();
     const handleAdd=()=>{
       const abc=[...val,[]]
       setVal(abc)
   }
+  const handleDelete=(i)=>{
+    const deletVal=[...val]
+    deletVal.splice(i,1)
+    setVal(deletVal)  
+}
     const Set=(e)=> {
       SetQuistions(oldArray => [...oldArray, e]);
     }
@@ -21,20 +28,31 @@ function CreateQuiz(){
         let create_data={
             name: Name,
             id_author:id_author,
-            quistions:[{question:'sss111',answer:[{answer:'dddd111',is_true:0},{answer:'dddd2',is_true:0}]},{question:'sss22',answer:[{answer:'dddd22',is_true:0}]}]
+            quistions:Quistions,
         }
-        Setupload(true)
-        console.log(Quistions)
-        if(upload ==true){
+        if(Quistions.length >0){
+          axios({
+            method: 'post',
+            url: `http://localhost/my-quiz/api/CreateQuiz.php`,
+            headers: { 'content-type': 'application/json' },
+            data: create_data
+            })
+            .then(result =>console.log(result.data)
+            )
+        }else{
+          Set_is_error(true)
+          Set_error("quistions is empty")
         }
-        // axios({
-        //     method: 'post',
-        //     url: `http://localhost/my-quiz/api/CreateQuiz.php`,
-        //     headers: { 'content-type': 'application/json' },
-        //     data: create_data
-        // })
-        // .then(result =>console.log(result.data)
-        // )
+    }
+      // error
+      function error(){
+        if(is_error ==true){
+            return(
+                <div class="alert  alert-danger alert-dismissible fade show text-center" role="alert">
+                {errors}
+                </div>
+            )
+        }
     }
     return (
     <>
@@ -56,7 +74,7 @@ function CreateQuiz(){
                                     <h2 class="text-uppercase text-center mb-5">Create A Quiz</h2>
                                   {/* end title */}
                                   {/* error */}
-                                  {/* {this.error()} */}
+                                  {error()}
                                   {/* error end */}
                                   {/* start form */}
                                     <form action="POST">
@@ -68,7 +86,7 @@ function CreateQuiz(){
                                         </div>
                                         {/* loop CreateQuistion */}
                                         {val.map((data,i)=>{
-                                        return(<CreateQuistion action={Set}/>)
+                                        return(<CreateQuistion action={Set} delete={handleDelete}/>)
                                       })
                                       }
                                       {/* ennd CreateQuistion */}

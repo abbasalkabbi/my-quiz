@@ -9,9 +9,29 @@ function CreateQuistion(props) {
     const [answer2,SetAnswer2]=useState()
     const [answer3,SetAnswer3]=useState()
     const [answer4,SetAnswer4]=useState()
+    // error 
+    const [is_error , Set_is_error]=useState(false);
+    const [errors , Set_error]=useState();
+    // error end
     useEffect(()=>{  SetArray({question:question,answers:[{answer:answer1,is_true:1},{answer:answer2,is_true:0},{answer:answer3,is_true:0},{answer:answer4,is_true:0}]})},[question,answer1,answer2,answer3,answer4])
     function save(){
+        if(answer1 != undefined && answer2 != undefined && answer3 != undefined && answer4 != undefined && question != undefined){
         props.action(array)
+        props.delete()
+    }else{
+        Set_is_error(true)
+        Set_error("input is empty")
+    }
+    }
+     // error
+    function error(){
+        if(is_error ==true){
+            return(
+                <div class="alert  alert-danger alert-dismissible fade show text-center" role="alert">
+                {errors}
+                </div>
+            )
+        }
     }
     return (
         <>
@@ -22,6 +42,7 @@ function CreateQuistion(props) {
               {/* h2 title */}
                 <h2 class="text-uppercase text-center mb-5">Create A question</h2>
               {/* end title */}
+            {error()}
               {/* question Name */}
                     <div class="form-outline mb-4">
                         <input type="text" id="form3Example1cg" class="form-control form-control-lg"
@@ -65,8 +86,8 @@ function CreateQuistion(props) {
             </div>
           {/* end card body */}
             <div class="d-flex justify-content-center">
-                                        <button type="button" onClick={()=>{save()}}
-                                        class="text-white btn btn-primary  btn-lg" >Save</button>
+                    <button type="button" onClick={()=>{save()}}
+                    class="text-white btn btn-primary  btn-lg" >Save</button>
             </div>
     </div>
     {/* end card */}

@@ -21,7 +21,7 @@ if($_POST){
         $id_question=$Quiz->id_question;
         // end create_Question
         echo "End";
-        foreach($quistion['answer'] as $answer){
+        foreach($quistion['answers'] as $answer){
             $a= $answer['answer'];
             $is_true=$answer['is_true'];
             $Quiz->create_Answer(id_question:$id_question,answer:$a,is_true:$is_true);
