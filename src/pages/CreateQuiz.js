@@ -1,16 +1,20 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState ,useContext } from "react"
 import axios from "axios";
 import { Navigate } from "react-router";
 import CreateQuistion from "../components/CreateQuistion";
+import Context from "../Context";
+
 
 function CreateQuiz(){
     const [Name,SetName]=useState();
     const [Quistions,SetQuistions]=useState([]);
     const id_author=localStorage.getItem('id');
     const [val,setVal]=useState([]);
+    const url=useContext(Context).CreateQuiz;
     // error 
     const [is_error , Set_is_error]=useState(false);
     const [errors , Set_error]=useState();
+    const [is_finshed , Set_is_finshed]=useState(false);
     const handleAdd=()=>{
       const abc=[...val,[]]
       setVal(abc)
@@ -34,11 +38,11 @@ function CreateQuiz(){
           if(Quistions.length >0){
             axios({
               method: 'post',
-              url: `http://localhost/my-quiz/api/CreateQuiz.php`,
+              url: `${url}`,
               headers: { 'content-type': 'application/json' },
               data: create_data
               })
-              .then(result =>console.log(result.data)
+              .then(result => Set_is_finshed(true)
               )
           }else{
             Set_is_error(true)
@@ -59,6 +63,20 @@ function CreateQuiz(){
             )
         }
     }
+      function finshed(){
+        if(is_finshed == true){
+          return( 
+
+            <>
+              <div class="alert alert-success d-flex align-items-center" role="alert">
+                <div>
+                  ADD Finshed
+                </div>
+              </div>
+            </>
+          )
+        }
+      }
     return (
     <>
         <section class="bg-sing-up " style={{"max-height": "fit-content","min-height":"100vh","height":"100vh"}}>
@@ -80,6 +98,7 @@ function CreateQuiz(){
                                   {/* end title */}
                                   {/* error */}
                                   {error()}
+                                  {finshed()}
                                   {/* error end */}
                                   {/* start form */}
                                     <form action="POST">

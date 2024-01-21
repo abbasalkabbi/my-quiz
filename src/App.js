@@ -12,6 +12,7 @@ function App() {
   const url_base='http://localhost/my-quiz/api/'
   const url = {
     Login:`${url_base}Login.php`,
+    CreateQuiz:`${url_base}CreateQuiz.php`,
     get_quiz:`${url_base}get_quiz.php?`,
     avatar:`${url_base}avatars/`,
     delete_quiz:`${url_base}DeleteQuiz.php?id=`,
