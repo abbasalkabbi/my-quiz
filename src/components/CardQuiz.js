@@ -10,7 +10,7 @@ return(
             props.id_author == localStorage.getItem('id')?
             <div class="btn-group w-25" role="group" aria-label="Basic mixed styles example">
                 <a href={`${delete_quiz}${props.id}`} type="button" class="btn btn-danger">Delete</a>
-                <a href={`/edit/${props.id}`} type="button" class="btn btn-success">Edit</a>
+                <a href={`/editquiz/${props.id}`} type="button" class="btn btn-success">Edit</a>
             </div>
             :""
             }
