@@ -1,6 +1,7 @@
 import { useEffect, useState ,useContext } from "react"
 import { useParams } from "react-router-dom";
 import Context from "../Context";
+import EditQuistion from "../components/EditQuistion";
 export default function EditQuiz(){
     const id_quiz=useParams().id
     const url=useContext(Context).get_quiz;
@@ -13,7 +14,7 @@ export default function EditQuiz(){
         fetch(`${link_quiz}`)
         .then(res=>res.json())
         .then(res =>{
-            console.log(res)
+            console.log(res.question)
             SetQuistions(res.question)
             SetFinsed(true)
         })
@@ -22,69 +23,7 @@ export default function EditQuiz(){
     function mapping(){
         if(finshed ==true){
             return( 
-                Quistions.map(e=><>
-                 {/* edit question quiz */}
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target={`#${e.question}`} aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                    Quistion
-                    </button>
-                </h2>
-                <div id={`${e.question}`} class="accordion-collapse collapse ">
-                    <div class="accordion-body">
-                        <form>
-                            {/* Name Quistion */}
-                            <div class="form-outline mb-4">
-                                <input type="text" id="form3Example1cg" class="form-control form-control-lg"
-                                    name="name" value={Name}  onChange={(e)=>SetName(e.target.value)}
-                                />
-                                <label class="form-label" for="form1Example13">Name Quistion</label>
-                            </div>
-                            {/* Name Quistion */}
-                            {/* Name Answer */}
-                            <div class="form-outline mb-4">
-                                <input type="text" id="form3Example1cg" class="form-control form-control-lg"
-                                    name="name" value={Name}  onChange={(e)=>SetName(e.target.value)}
-                                />
-                                <label class="form-label" for="form1Example13">Answer 1</label>
-                            </div>
-                            {/* Name Answer */}
-                            {/* Name Answer */}
-                            <div class="form-outline mb-4">
-                                <input type="text" id="form3Example1cg" class="form-control form-control-lg"
-                                    name="name" value={Name}  onChange={(e)=>SetName(e.target.value)}
-                                />
-                                <label class="form-label" for="form1Example13">Answer 2</label>
-                            </div>
-                            {/* Name Answer */}
-                            {/* Name Answer */}
-                            <div class="form-outline mb-4">
-                                <input type="text" id="form3Example1cg" class="form-control form-control-lg"
-                                    name="name" value={Name}  onChange={(e)=>SetName(e.target.value)}
-                                />
-                                <label class="form-label" for="form1Example13">Answer 3</label>
-                            </div>
-                            {/* Name Answer */}
-                            {/* Name Answer */}
-                            <div class="form-outline mb-4">
-                                <input type="text" id="form3Example1cg" class="form-control form-control-lg"
-                                    name="name" value={Name}  onChange={(e)=>SetName(e.target.value)}
-                                />
-                                <label class="form-label" for="form1Example13">Answer 4</label>
-                            </div>
-                            {/* Name Answer */}
-                            {/* submit */}
-                            <div class="d-flex ">
-                                            <button type="submit"
-                                            class="text-white btn btn-primary  " >Save </button>
-                                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            {/* end edit question quiz */}
-                
-                </>)
+                Quistions.map(e=><EditQuistion question={e.question} id_question={e.id_question}/>)
             )
         }
     }
