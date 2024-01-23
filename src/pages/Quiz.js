@@ -1,9 +1,11 @@
 import { useState ,useEffect, useContext, useCallback } from "react"
 import Context from "../Context";
 import CardQuiz from "../components/CardQuiz"
+import Loading from "../components/Loading";
 export default function Quiz(){
     const [Quiz,SetQuiz]=useState([]);
     const url=useContext(Context).get_quiz;
+    const [is_loading,Setloading]=useState(false)
       // get user from api
     useEffect(()=>{
         fetch(`${url}`)
@@ -11,6 +13,7 @@ export default function Quiz(){
         .then(res =>{
             console.log(res)
             SetQuiz(res)
+            Setloading(true)
         })
         return (()=>false)
     },[])
@@ -19,6 +22,9 @@ export default function Quiz(){
     }
     return(<>
     <div className="container">
+        {
+            is_loading?'':<Loading/>
+        }
         <h1 className="text-center mt-1 mb-2">Quiz</h1>
         <div className="row">
         {mapping()}

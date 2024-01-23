@@ -3,6 +3,7 @@ import axios from "axios";
 import { Navigate } from "react-router";
 import CreateQuistion from "../components/CreateQuistion";
 import Context from "../Context";
+import Loading from "../components/Loading";
 
 
 function CreateQuiz(){
@@ -11,10 +12,11 @@ function CreateQuiz(){
     const id_author=localStorage.getItem('id');
     const [val,setVal]=useState([]);
     const url=useContext(Context).CreateQuiz;
+    const [is_loading,Setloading]=useState(false)
     // error 
     const [is_error , Set_is_error]=useState(false);
     const [errors , Set_error]=useState();
-    const [is_finshed , Set_is_finshed]=useState(false);
+    const [is_finshed , Set_is_finshed]=useState(false); 
     const handleAdd=()=>{
       const abc=[...val,[]]
       setVal(abc)

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Context from "../Context";
 import EditQuistion from "../components/EditQuistion";
 import axios from "axios";
+import Loading from "../components/Loading";
 
 export default function EditQuiz(){
     const id_quiz=useParams().id
@@ -12,6 +13,7 @@ export default function EditQuiz(){
     const [Name,SetName]=useState()
     const [Quistions,SetQuistions]=useState([]);
     const[finshed,SetFinsed]=useState(false);
+    const [is_loading,Setloading]=useState(false)
        // error 
     const [is_error , Set_is_error]=useState(false);
     const [errors , Set_error]=useState();
@@ -23,6 +25,7 @@ export default function EditQuiz(){
             SetQuistions(res.question)
             SetName(res.quiz.name)
             SetFinsed(true)
+            Setloading(true)
         })
         return (()=>false)
     },[])
@@ -66,8 +69,12 @@ export default function EditQuiz(){
     }
     return(
     <div className="container">
+        {
+            is_loading?'':<Loading/>
+        }
         <div class="accordion" id="accordionPanelsStayOpenExample">
             {/* edit name quiz */}
+            
             <div class="accordion-item">
                 <h2 class="accordion-header">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
