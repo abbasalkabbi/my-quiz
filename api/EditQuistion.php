@@ -3,14 +3,17 @@
 use App\Quiz;
 
 require 'config.php';
+require 'quiz.php';
 $rest_json = file_get_contents("php://input");
 $_POST = json_decode($rest_json, true);
+$Quiz =new Quiz();
+$Quiz->SetDb($conn);
 if($_POST){
     if(isset($_POST['data'])){
     $quistion=$_POST['data'];
     $id=$quistion['id_question'];
     $name=$quistion['question'];
-    $update=mysqli_query($conn,"UPDATE `question` SET `question` = '$name' WHERE `question`.`id_question` = $id");
+    $Quiz->Edit_Question(question:$name,id_question:$id);
     foreach($quistion['answers'] as $answer){
         $a= $answer['answer'];
         $id_answer=$answer['id_answer'];
@@ -18,7 +21,7 @@ if($_POST){
         $update=mysqli_query($conn,"UPDATE `answer` SET `answer` = '$a' WHERE `answer`.`id_answer` = $id_answer");
     }
 }
-if($_POST['name']){
+if(isset($_POST['name'])){
     $name =$_POST['name'];
     $id_quiz =$_POST['id_quiz'];
     $update=mysqli_query($conn,"UPDATE `quiz` SET `name` = '$name' WHERE `quiz`.`id_quiz` = $id_quiz");

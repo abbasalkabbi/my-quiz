@@ -73,7 +73,7 @@ export default function EditQuistion(props){
                                     headers: { 'content-type': 'application/json' },
                                     data: data_update
                                     })
-                                    .then(result => console.log(result)
+                                    .then(result => console.log(result.data)
                                     )
                             }else{
                                 Set_is_error(true)

@@ -108,6 +108,12 @@ class Quiz
             }
         }
         // Get question End 
+        // Edit question 
+        public function Edit_Question($id_question=null,$question=null){
+            $update=mysqli_query($this->db,"UPDATE `question` SET `question` = '$question' WHERE `question`.`id_question` ='{$id_question}'");
+            $this->SetId_Question($id_question);
+        }
+        // Edit question  End
         // create_Answer
         public function create_Answer($id_question,$answer,$is_true){
             $this->SetId_Question($id_question);
