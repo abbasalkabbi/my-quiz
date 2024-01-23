@@ -2,6 +2,8 @@ import { useEffect, useState ,useContext } from "react"
 import { useParams } from "react-router-dom";
 import Context from "../Context";
 import EditQuistion from "../components/EditQuistion";
+import axios from "axios";
+
 export default function EditQuiz(){
     const id_quiz=useParams().id
     const url=useContext(Context).get_quiz;
@@ -10,12 +12,16 @@ export default function EditQuiz(){
     const [Name,SetName]=useState()
     const [Quistions,SetQuistions]=useState([]);
     const[finshed,SetFinsed]=useState(false);
+       // error 
+    const [is_error , Set_is_error]=useState(false);
+    const [errors , Set_error]=useState();
     useEffect(()=>{
         fetch(`${link_quiz}`)
         .then(res=>res.json())
         .then(res =>{
-            console.log(res.question)
+            console.log(res.quiz.name)
             SetQuistions(res.question)
+            SetName(res.quiz.name)
             SetFinsed(true)
         })
         return (()=>false)
@@ -28,6 +34,36 @@ export default function EditQuiz(){
         }
     }
     // end mapping
+    function handleFormSubmit(e){
+        e.preventDefault();
+        let data_update={
+            name:Name,
+            id_quiz:id_quiz
+        }
+        if(Name){
+            axios({
+                method: 'post',
+                url: `http://localhost/my-quiz/api/EditQuistion.php`,
+                headers: { 'content-type': 'application/json' },
+                data: data_update
+                })
+                .then(result => console.log(result)
+                )
+        }else{
+            Set_is_error(true)
+            Set_error('Name Empty')
+        }
+    }
+      // error
+    function error(){
+        if(is_error ==true){
+            return(
+                <div class="alert  alert-danger alert-dismissible fade show text-center" role="alert">
+                {errors}
+                </div>
+            )
+        }
+    }
     return(
     <div className="container">
         <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -41,6 +77,7 @@ export default function EditQuiz(){
                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                     <div class="accordion-body">
                         <form>
+                            {error()}
                             {/* input */}
                             <div class="form-outline mb-4">
                                 <input type="text" id="form3Example1cg" class="form-control form-control-lg"
@@ -51,7 +88,7 @@ export default function EditQuiz(){
                             {/* submit */}
                             <div class="d-flex ">
                                             <button type="submit"
-                                            class="text-white btn btn-primary  " >Save </button>
+                                            class="text-white btn btn-primary  " onClick={e=>handleFormSubmit(e)}>Save </button>
                                         </div>
                         </form>
                     </div>
