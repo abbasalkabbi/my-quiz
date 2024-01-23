@@ -17,8 +17,8 @@ if($_POST){
     foreach($quistion['answers'] as $answer){
         $a= $answer['answer'];
         $id_answer=$answer['id_answer'];
-        echo $id_answer;
-        $update=mysqli_query($conn,"UPDATE `answer` SET `answer` = '$a' WHERE `answer`.`id_answer` = $id_answer");
+        echo $id_answer;  
+        $Quiz->Edit_Answer(id_answer:$id_answer,answer:$a);
     }
 }
 if(isset($_POST['name'])){
