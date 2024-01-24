@@ -27,6 +27,22 @@ if(isset($_POST['name'])){
     $Quiz->Edit_Quiz(id_quiz:$id_quiz,name:$name);
     echo $name;
 }
+if(isset($_POST['questions'])){
+    $quistion=$_POST['questions'];
+
+ // Get create_Question
+    $q=$quistion['question']; //Get question
+    $id_quiz=$_POST['id_quiz']; //Get id_quiz
+    $Quiz->create_Question(id_quiz:$id_quiz,question:$q);
+    $id_question=$Quiz->id_question;
+    // end create_Question
+    echo "End";
+    foreach($quistion['answers'] as $answer){
+        $a= $answer['answer'];
+        $is_true=$answer['is_true'];
+        $Quiz->create_Answer(id_question:$id_question,answer:$a,is_true:$is_true);
+    }
+}
 }
 
 ?>

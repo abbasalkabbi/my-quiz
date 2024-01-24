@@ -4,7 +4,7 @@ import Context from "../Context";
 import EditQuistion from "../components/EditQuistion";
 import axios from "axios";
 import Loading from "../components/Loading";
-
+import AddQuistion from "../components/AddQuistion";
 export default function EditQuiz(){
     const id_quiz=useParams().id
     const url=useContext(Context).get_quiz;
@@ -103,6 +103,7 @@ export default function EditQuiz(){
             </div>
             {/* end edit name quiz */}
             {mapping()}
+            {<AddQuistion id_quiz={id_quiz}/>}
         </div>
     </div>
     )
