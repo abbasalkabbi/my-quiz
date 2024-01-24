@@ -28,6 +28,7 @@ function AddQuistion(props) {
                 })
                 .then(result => console.log(result.data)
                 )
+                props.delete()
     }else{
         Set_is_error(true)
         Set_error("input is empty")

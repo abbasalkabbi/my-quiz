@@ -14,6 +14,16 @@ export default function EditQuiz(){
     const [Quistions,SetQuistions]=useState([]);
     const[finshed,SetFinsed]=useState(false);
     const [is_loading,Setloading]=useState(false)
+    const [val,setVal]=useState([]);
+    const handleAdd=()=>{
+        const abc=[...val,[]]
+        setVal(abc)
+    }
+    const handleDelete=(i)=>{
+        const deletVal=[...val]
+        deletVal.splice(i,1)
+        setVal(deletVal)  
+    }
        // error 
     const [is_error , Set_is_error]=useState(false);
     const [errors , Set_error]=useState();
@@ -103,7 +113,14 @@ export default function EditQuiz(){
             </div>
             {/* end edit name quiz */}
             {mapping()}
-            {<AddQuistion id_quiz={id_quiz}/>}
+            <div class="d-flex justify-content-center mt-2 mb-2">
+                    <button type="button"  onClick={()=>handleAdd()}
+                    class="text-white btn btn-primary  btn-lg" >Add anther Quistion </button>
+            </div>
+            {val.map((data,i)=>{
+                                        return(<AddQuistion id_quiz={id_quiz} delete={handleDelete}/>)
+                                })
+            }
         </div>
     </div>
     )
