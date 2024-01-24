@@ -69,6 +69,11 @@ class Quiz
             $quiz_delete=mysqli_query($this->db,"DELETE   FROM quiz WHERE id_quiz ='{$id_quiz}'");
         }
         // delete  quiz End
+        // Edit_Quiz
+        public function Edit_Quiz($id_quiz=null,$name =null){
+            $update=mysqli_query($this->db,"UPDATE `quiz` SET `name` = '$name' WHERE `quiz`.`id_quiz` = $id_quiz");
+        }
+        // Edit_Quiz End
         // create_Question
         public function create_Question($id_quiz,$question){
         $this->SetId_Quiz($id_quiz);

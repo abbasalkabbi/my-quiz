@@ -24,7 +24,7 @@ if($_POST){
 if(isset($_POST['name'])){
     $name =$_POST['name'];
     $id_quiz =$_POST['id_quiz'];
-    $update=mysqli_query($conn,"UPDATE `quiz` SET `name` = '$name' WHERE `quiz`.`id_quiz` = $id_quiz");
+    $Quiz->Edit_Quiz(id_quiz:$id_quiz,name:$name);
     echo $name;
 }
 }
