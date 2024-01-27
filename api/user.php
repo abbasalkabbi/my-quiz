@@ -29,6 +29,9 @@ class User
     }
     public function SetDb($db){
         return $this->db=$db;
+    }  
+    public function SetID($id){
+        return $this->id=$id;
     }
     // end set
     // create
@@ -63,13 +66,18 @@ class User
         }
     }
     // end GetUser
+    // Get Quiz user
+    public function GetQuiz(){
+        $id=$this->id;
+        $db=$this->db;
+        $quiz_sql=mysqli_query($db,"SELECT * FROM quiz WHERE id_author ='{$id}'");
+        if(mysqli_num_rows($quiz_sql) >0){
+            $quiz = mysqli_fetch_all($quiz_sql);
+            return $quiz;
+        }
+        return false;
+    }
+    // Get Quiz user End
 }
-// $a  =new User();
-// $a ->SetDb($conn);
-// var_dump($a->create((object) array(
-//     "name"=>"abbas",
-//     "email"=>"email",
-//     "password"=>"password",
-//     "role"=>"role",)));
-    
+
 ?>
