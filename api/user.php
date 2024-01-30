@@ -50,7 +50,12 @@ class User
         if($id !=null){
             $user_sql=mysqli_query($this->db,"SELECT * FROM users WHERE id ='{$id}' ");
             if(mysqli_num_rows($user_sql) >0){
-                return $user = mysqli_fetch_object($user_sql);
+                $user = mysqli_fetch_object($user_sql);
+                $this->SetName($user->name);
+                $this->SetEmail($user->email);
+                $this->SetRole($user->role);
+                $this->SetAvatar($user->avatar);
+                return $user;
             }else{
                 return false;
             }

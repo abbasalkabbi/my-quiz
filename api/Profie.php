@@ -6,5 +6,6 @@ require "./user.php";
 $user=new User();
 $user->SetDb($conn);
 $user->SetId(1);
-var_dump($user->GetQuiz());
+$user->GetUser(id:1);
+echo $user->avatar;
 ?>
