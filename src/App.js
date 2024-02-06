@@ -9,6 +9,7 @@ import TackQuiz from "./pages/TackQuiz";
 import Quiz from "./pages/Quiz";
 import CreateQuiz from "./pages/CreateQuiz";
 import EditQuiz from "./pages/EditQuiz";
+import User from "./pages/User";
 function App() {
   const url_base='http://localhost/my-quiz/api/'
   const url = {
@@ -17,6 +18,7 @@ function App() {
     get_quiz:`${url_base}get_quiz.php?`,
     avatar:`${url_base}avatars/`,
     delete_quiz:`${url_base}DeleteQuiz.php?id=`,
+    get_user:`${url_base}Get_User.php?`,
     };
   return (
     <div className="App">
@@ -31,6 +33,7 @@ function App() {
                 <Route path="quiz/" element={<Quiz/>}/>
                 <Route path="createQuiz/" element={<CreateQuiz/>}/>
                 <Route path="editquiz/:id" element={<EditQuiz/>}/>
+                <Route path="user/:id" element={<User/>}/>
             </Route>
           </Routes>
         </BrowserRouter> 
