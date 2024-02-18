@@ -27,7 +27,7 @@ export default function User(){
     },[])
     function mapping(){
         if(status == true){
-
+          console.log(user)
         }
     }
     return(

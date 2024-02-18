@@ -37,6 +37,15 @@ class Quiz
         // end create
         // get Get_Quiz
         public function Get_Quiz($id_quiz=null , $id_author=null ,$name =null){
+            
+            if($id_author!=null){
+                $quiz_sql=mysqli_query($this->db,"SELECT * FROM quiz WHERE id_author ='{$id_author}'");
+                if(mysqli_num_rows($quiz_sql) >0){
+                    $quiz = mysqli_fetch_object($quiz_sql);
+                    return $quiz;
+                }
+                    return false;
+            }
             // get by name
             if($id_author !=null && $name !=null){
                 $quiz_sql=mysqli_query($this->db,"SELECT * FROM quiz WHERE id_author ='{$id_author}' AND name = '{$name}'");
