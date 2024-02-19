@@ -41,7 +41,7 @@ class Quiz
             if($id_author!=null){
                 $quiz_sql=mysqli_query($this->db,"SELECT * FROM quiz WHERE id_author ='{$id_author}'");
                 if(mysqli_num_rows($quiz_sql) >0){
-                    $quiz = mysqli_fetch_object($quiz_sql);
+                    $quiz = mysqli_fetch_all($quiz_sql,MYSQLI_ASSOC);
                     return $quiz;
                 }
                     return false;
@@ -166,6 +166,16 @@ class Quiz
             $update=mysqli_query($this->db,"UPDATE `answer` SET `answer` = '$answer' WHERE `answer`.`id_answer` = '{$id_answer}'");
         }
         // Edit_Answer End
+        public function Count($id_author=null ){
+            if($id_author!=null){
+                $quiz_sql=mysqli_query($this->db,"SELECT COUNT(*) AS Count FROM  quiz WHERE id_author ='{$id_author}'");
+                if(mysqli_num_rows($quiz_sql) >0){
+                    $quiz =$quiz_sql->fetch_assoc();
+                    return$quiz['Count'];
+                }
+                    return false;
+            }
+        }
 }
 // $a =new Quiz();
 // $a->SetDb($conn);
