@@ -8,6 +8,7 @@ export default function User(){
     const id_user=useParams().id;
     const[user,SetUser]=useState([])
     const[status,SetStatus]=useState()
+    const[Count,SetCount]=useState()
     const url=useContext(Context).get_user;
     const link_user=url+`id=${id_user}`;
      // get user from api
@@ -21,6 +22,7 @@ export default function User(){
             if(res.status == true){
                 SetStatus(true)
                 SetUser(res.user)
+                SetCount(res.count)
                 if(status ==true){
                     console.log(user)
                 }
@@ -57,8 +59,8 @@ export default function User(){
           <div class="p-4 text-black" style={{"background-color": "#f8f9fa"}}>
             <div class="d-flex justify-content-end text-center py-1">
               <div>
-                <p class="mb-1 h5">253</p>
-                <p class="small text-muted mb-0">Photos</p>
+                <p class="mb-1 h5">{Count}</p>
+                <p class="small text-muted mb-0">Quiz</p>
               </div>
               <div class="px-3">
                 <p class="mb-1 h5">1026</p>
