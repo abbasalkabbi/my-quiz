@@ -166,7 +166,6 @@ class Quiz
             $update=mysqli_query($this->db,"UPDATE `answer` SET `answer` = '$answer' WHERE `answer`.`id_answer` = '{$id_answer}'");
         }
         // Edit_Answer End
-
 }
 // $a =new Quiz();
 // $a->SetDb($conn);

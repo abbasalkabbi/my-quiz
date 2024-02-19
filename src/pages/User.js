@@ -3,6 +3,8 @@ import { useState ,useEffect, useContext, useCallback } from "react"
 import Context from "../Context";
 
 export default function User(){
+    const avatar=useContext(Context).avatar;
+    console.log(avatar)
     const id_user=useParams().id;
     const[user,SetUser]=useState([])
     const[status,SetStatus]=useState()
@@ -39,17 +41,17 @@ export default function User(){
         <div class="card">
           <div class="rounded-top text-white d-flex flex-row" style={{"background-color": "#000" ,"height":"200px"}}>
             <div class="ms-4 mt-5 d-flex flex-column" style={{"width": "150px"}}>
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+              <img src={`${avatar}${user.avatar}`}
                 alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                style={{'width': '150px' ,'z-index': '1'}}/>
+                style={{'width': '150px' ,'height': '150px' ,'z-index': '1'}}/>
               <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
                 style={{"z-index": "1"}}>
                 Edit profile
               </button>
             </div>
             <div class="ms-3" style={{"margin-top": "130px"}}>
-              <h5>Andy Horwitz</h5>
-              <p>New York</p>
+              <h5>{user.name}</h5>
+              <p>{user.role}</p>
             </div>
           </div>
           <div class="p-4 text-black" style={{"background-color": "#f8f9fa"}}>
