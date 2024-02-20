@@ -1,12 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { useState ,useEffect, useContext, useCallback } from "react"
 import Context from "../Context";
-
+import CardQuiz from "../components/CardQuiz"
 export default function User(){
     const avatar=useContext(Context).avatar;
     console.log(avatar)
     const id_user=useParams().id;
     const[user,SetUser]=useState([])
+    const[Quiz,SetQuiz]=useState([])
     const[status,SetStatus]=useState()
     const[Count,SetCount]=useState()
     const url=useContext(Context).get_user;
@@ -22,16 +23,17 @@ export default function User(){
             if(res.status == true){
                 SetStatus(true)
                 SetUser(res.user)
+                SetQuiz(res.quiz)
                 SetCount(res.count)
                 if(status ==true){
-                    console.log(user)
+                    console.log(res)
                 }
             }
         })
     },[])
     function mapping(){
         if(status == true){
-          console.log(user)
+          return Quiz.map((e)=><CardQuiz id={e.id_quiz} name={e.name} id_author={e.id_author}/>)
         }
     }
     return(
@@ -85,25 +87,8 @@ export default function User(){
               <p class="lead fw-normal mb-0">Recent photos</p>
               <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
             </div>
-            <div class="row g-2">
-              <div class="col mb-2">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
-                  alt="image 1" class="w-100 rounded-3"/>
-              </div>
-              <div class="col mb-2">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
-                  alt="image 1" class="w-100 rounded-3"/>
-              </div>
-            </div>
-            <div class="row g-2">
-              <div class="col">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
-                  alt="image 1" class="w-100 rounded-3"/>
-              </div>
-              <div class="col">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
-                  alt="image 1" class="w-100 rounded-3"/>
-              </div>
+            <div class="row">
+              {mapping()}
             </div>
           </div>
         </div>
