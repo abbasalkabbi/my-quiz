@@ -36,6 +36,9 @@ export default function User(){
           return Quiz.map((e)=><CardQuiz id={e.id_quiz} name={e.name} id_author={e.id_author}/>)
         }
     }
+    if(status ==false){
+      return(<></>)
+    }
     return(
     <>
 <section class="h-100 gradient-custom-2">
