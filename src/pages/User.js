@@ -48,10 +48,15 @@ export default function User(){
               <img src={`${avatar}${user.avatar}`}
                 alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                 style={{'width': '150px' ,'height': '150px' ,'z-index': '1'}}/>
+              {
+              id_user == localStorage.getItem('id')?
+
               <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
                 style={{"z-index": "1"}}>
                 Edit profile
               </button>
+              :""
+              }
             </div>
             <div class="ms-3" style={{"margin-top": "130px"}}>
               <h5>{user.name}</h5>
@@ -84,7 +89,7 @@ export default function User(){
               </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mb-4">
-              <p class="lead fw-normal mb-0">Recent photos</p>
+              <p class="lead fw-normal mb-0">Quiz</p>
               <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
             </div>
             <div class="row">
